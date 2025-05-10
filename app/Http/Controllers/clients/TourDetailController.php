@@ -4,15 +4,25 @@ namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\clients\Tours;
 
 class TourDetailController extends Controller
 {
+    private $tours;
+    public function __construct()
+    {
+        $this->tours = new Tours();
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id=0)
     {
-        return view('clients.tour-detail');
+        $title = 'Chi tiết tour'.$id;
+
+        $tourDetail = $this->tours->getTourDetail($id);
+        
+        return view('clients.tour-detail', compact('title', 'tourDetail'));
     }
 
     /**
