@@ -29,7 +29,7 @@ class Tours extends Model
     // Lấy chi tiết tours
     public function getTourDetail($id)
     {
-        // Lấy tour với id xác định (dùng first để lấy 1 bản ghi thay vì collection)
+        // Lấy tour với id xác định
         $tour = DB::table($this->table)
             ->where('tourId', $id)
             ->first();

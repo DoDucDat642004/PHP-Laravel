@@ -146,14 +146,13 @@
                                     </button>
 
                                     <ul class="dropdown-menu" id="dropdownMenu">
-                                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
-                                        {{-- @if (session()->has('username'))
+                                        @if (session()->has('username'))
                                             <li><a href="#">Thông tin cá nhân</a></li>
-                                            <li><a href="#">Tour đã đặt</a></li>
-                                            <li><a href="#">Đăng xuất</a></li>
+                                            {{-- <li><a href="{{ route('my-tours') }}">Tour đã đặt</a></li> --}}
+                                            <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else
-                                            <li><a href="#">Đăng nhập</a></li>
-                                        @endif --}}
+                                            <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                        @endif
                                     </ul>
 
                                 </li>

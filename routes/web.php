@@ -30,5 +30,10 @@ Route::get('/tour-detail/{id?}', [TourDetailController::class, 'index'])->name('
 route::get('/blog', [BlogController::class, 'index'])->name('blog');
 route::get('/blog-detail', [BlogDetailController::class, 'index'])->name('blog-detail');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'register'])->name('register');
+// Route::post('/login', [LoginController::class, 'register'])->name('register');
 Route::get('activate-account/{token}', [LoginController::class, 'activateAccount'])->name('activate.account');
+
+
+Route::post('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/login', [LoginController::class, 'login'])->name('user-login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

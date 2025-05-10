@@ -27,39 +27,6 @@ class LoginController extends Controller
         return view('clients.login', compact('title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function register(Request $request)
-    // {
-    //     $username_regis = $request->username_register;
-    //     $email = $request->email_register;
-    //     $password_regis = $request->password_register;
-
-
-    //     $checkAccountExist = $this->login->checkUserExist($username_regis, $email);
-
-    //     if($checkAccountExist){
-    //         return response()->json([
-    //             'success' => true,
-    //             'message' => 'Tên người dùng hoặc email đã tồn tại'
-    //         ]);
-    //     }
-
-    //     $datainsert = [
-    //         'username' => $username_regis,
-    //         'email' => $email,
-    //         'password' => md5($password_regis)
-    //     ];
-
-    //     $this->login->registerAccount($datainsert);
-
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Đăng ký thành công'
-    //     ]);
-    // }
-
     public function register(Request $request)
     {
         $username_regis = $request->input('username_register');
@@ -121,5 +88,44 @@ class LoginController extends Controller
         } else {
             return redirect('/login')->with('error', 'Mã kích hoạt không hợp lệ!');
         }
+    }
+
+    //Xử lý người dùng đăng nhập
+    public function login(Request $request)
+    {
+        $username = $request->username;
+        $password = $request->password;
+
+        $data_login = [
+            'username' => $username,
+            'password' => md5($password)
+        ];
+
+        $user = $this->login->login($data_login);
+
+        if ($user != null) {
+            $request->session()->put('username', $username);
+            return response()->json([
+                'success' => true,
+                'message' => 'Đăng nhập thành công!',
+                'redirectUrl' => route('home')
+            ]);
+
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Thông tin tài khoản không chính xác!',
+            ]);
+        }
+    }
+
+    //Xử lý đăng xuất
+    public function logout(Request $request)
+    {
+        // Xóa session lưu trữ thông tin người dùng đã đăng nhập
+        $request->session()->forget('username');
+        // $request->session()->forget('avatar');
+        // toastr()->success("Đăng xuất thành công!",'Thông báo');
+        return redirect()->route('home');
     }
 }

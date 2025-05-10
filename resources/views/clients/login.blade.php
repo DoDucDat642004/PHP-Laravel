@@ -14,7 +14,8 @@
 
                     <div class="signin-form">
                         <h2 class="form-title">Đăng nhập</h2>
-                        <form action="#" method="POST" class="login-form" id="login-form" style="margin-top: 15px">
+
+                        <form action="{{ route('user-login') }}" method="POST" class="login-form" id="login-form" style="margin-top: 15px">
                             <div class="form-group">
                                 <label for="username_login"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="username_login" id="username_login" placeholder="Tên đăng nhập" required/>

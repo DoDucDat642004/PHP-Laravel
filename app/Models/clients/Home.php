@@ -33,7 +33,6 @@ class Home extends Model
     //     return $tours;
     // }
 
-    // Trong model Home.php
     public function getHomeTours(): Collection
     {
         // Lấy thông tin tour

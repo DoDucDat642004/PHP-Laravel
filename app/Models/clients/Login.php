@@ -37,4 +37,24 @@ class Login extends Model
             ->where('activation_token', $token)
             ->update(['activation_token' => null, 'isActive' => 'y']);
     }
+
+    public function login($account)
+    {
+        $getUser = DB::table($this->table)
+            ->where('username', $account['username'])
+            ->where('password', $account['password'])
+            ->first();
+
+        return $getUser;
+    }
+
+
+    //Login with google
+    public function checkUserExistGoogle($google_id)
+    {
+        $check = DB::table($this->table)
+            ->where('google_id', $google_id)->first();
+
+        return $check;
+    }
 }
