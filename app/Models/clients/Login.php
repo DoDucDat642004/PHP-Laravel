@@ -12,8 +12,15 @@ class Login extends Model
 
     protected $table = 'tbl_users';
 
-    public function registerAccount($data): bool{
-        return DB::table($this->table)->insert($data);
+    public function registerAcount($data)
+    {
+        $userId = DB::table($this->table)->insertGetId($data);
+
+        if ($userId) {
+            return DB::table($this->table)->where('userId', $userId)->first();
+        }
+
+        return null;
     }
 
     public function checkUserExist($username, $email) : bool{

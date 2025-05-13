@@ -7,57 +7,52 @@ use Illuminate\Http\Request;
 use App\Models\clients\Login;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\DB;
+use App\Models\clients\User;
 
 
 
 class LoginController extends Controller
 {
-    private $login; 
+    private $login;
+    protected $user;
+
     public function __construct()
     {
         $this->login = new Login();
-    }  
-    /**
-     * Display a listing of the resource.
-     */
+        $this->user = new User();
+    }
     public function index()
     {
         $title = 'Đăng nhập';
         return view('clients.login', compact('title'));
     }
 
+
     public function register(Request $request)
     {
-        $username_regis = $request->input('username_register');
-        $email = $request->input('email_register');
-        $password_regis = $request->input('password_register');
-
-        if (!$username_regis || !$email || !$password_regis) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Thiếu dữ liệu đầu vào'
-            ]);
-        }
+        $username_regis = $request->username_regis;
+        $email = $request->email;
+        $password_regis = $request->password_regis;
+        $re_password_regis = $request->re_password;
 
         $checkAccountExist = $this->login->checkUserExist($username_regis, $email);
-
         if ($checkAccountExist) {
             return response()->json([
                 'success' => false,
-                'message' => 'Tên người dùng hoặc email đã tồn tại'
+                'message' => 'Tên người dùng hoặc email đã tồn tại!'
             ]);
         }
-        
-        $activation_token = Str::random(60);
-        $datainsert = [
-            'username' => $username_regis,
-            'email' => $email,
-            'password' => md5($password_regis),
+
+        $activation_token = Str::random(60); // Tạo token ngẫu nhiên
+        // Nếu không tồn tại, thực hiện đăng ký
+        $dataInsert = [
+            'username'         => $username_regis,
+            'email'            => $email,
+            'password'         => md5($password_regis),
             'activation_token' => $activation_token
         ];
 
-        $this->login->registerAccount($datainsert);
+        $this->login->registerAcount($dataInsert);
 
         // Gửi email kích hoạt
         $this->sendActivationEmail($email, $activation_token);
@@ -101,14 +96,18 @@ class LoginController extends Controller
             'password' => md5($password)
         ];
 
-        $user = $this->login->login($data_login);
+        $user_login = $this->login->login($data_login);
+        $userId = $this->user->getUserId($username);
+        $user = $this->user->getUser($userId);
 
-        if ($user != null) {
+        if ($user_login != null) {
             $request->session()->put('username', $username);
+            $request->session()->put('avatar', $user->avatar);
+            toastr()->success("Đăng nhập thành công!",[],'Thông báo');
             return response()->json([
                 'success' => true,
                 'message' => 'Đăng nhập thành công!',
-                'redirectUrl' => route('home')
+                'redirectUrl' => route('home'),  // Optional: dynamic home route
             ]);
 
         } else {
@@ -124,8 +123,9 @@ class LoginController extends Controller
     {
         // Xóa session lưu trữ thông tin người dùng đã đăng nhập
         $request->session()->forget('username');
-        // $request->session()->forget('avatar');
-        // toastr()->success("Đăng xuất thành công!",'Thông báo');
+        $request->session()->forget('avatar');
+        $request->session()->forget('userId');
+        toastr()->success("Đăng xuất thành công!",[],'Thông báo');
         return redirect()->route('home');
     }
 }

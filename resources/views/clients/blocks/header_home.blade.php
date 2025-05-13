@@ -114,7 +114,7 @@
                         <!-- Nav Search -->
                         <div class="nav-search">
                             <button class="far fa-search"></button>
-                            <form action="#" class="hide" method="GET">
+                            <form action="{{ route('search-voice-text') }}" class="hide" method="GET">
                                 <input type="text" name="keyword" placeholder="Search" class="searchbox" required>
                                 <i class="fa fa-microphone" aria-hidden="true" style="margin: 0 16px"
                                     id="voice-search"></i>
@@ -132,7 +132,7 @@
                             <div class="menu-sidebar">
                                 <li class="drop-down">
                                     <button class="dropdown-toggle bg-transparent" id="userDropdown"
-                                        style="color: white">
+                                        style="color: black">
                                         @if (session()->has('avatar'))
                                             @php
                                                 $avatar = session()->get('avatar', 'user_avatar.jpg');
@@ -147,7 +147,7 @@
 
                                     <ul class="dropdown-menu" id="dropdownMenu">
                                         @if (session()->has('username'))
-                                            <li><a href="#">Thông tin cá nhân</a></li>
+                                            <li><a href="{{ route('user-profile') }}">Thông tin cá nhân</a></li>
                                             {{-- <li><a href="{{ route('my-tours') }}">Tour đã đặt</a></li> --}}
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else
@@ -157,6 +157,7 @@
 
                                 </li>
                             </div>
+
                         </div>
                     </div>
                 </div>

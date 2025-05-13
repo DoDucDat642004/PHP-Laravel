@@ -137,7 +137,7 @@
                                                 $avatar = session()->get('avatar', 'user_avatar.jpg');
                                             @endphp
                                             <img id="avatarPreview" class="img-account-profile rounded-circle"
-                                                src="{{ asset('admin/assets/images/user-profile/' . $avatar) }}"
+                                                src="{{ asset('clients/assets/images/user-profile/' . $avatar) }}"
                                                 style="width: 36px; height: 36px;">
                                         @else
                                             <i class='bx bxs-user bx-tada' style="font-size: 36px; color: black;"></i>
@@ -145,14 +145,13 @@
                                     </button>
 
                                     <ul class="dropdown-menu" id="dropdownMenu">
-                                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
-                                        {{-- @if (session()->has('username'))
+                                        @if (session()->has('username'))
                                             <li><a href="{{ route('user-profile') }}">Thông tin cá nhân</a></li>
-                                            <li><a href="{{ route('my-tours') }}">Tour đã đặt</a></li>
+                                            {{-- <li><a href="{{ route('my-tours') }}">Tour đã đặt</a></li> --}}
                                             <li><a href="{{ route('logout') }}">Đăng xuất</a></li>
                                         @else
                                             <li><a href="{{ route('login') }}">Đăng nhập</a></li>
-                                        @endif --}}
+                                        @endif
                                     </ul>
 
                                 </li>

@@ -497,7 +497,8 @@
                        
                         <div class="widget widget-booking" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                             <h5 class="widget-title">Tour Booking</h5>
-                            <form action="#">
+                            <form action="{{ route('booking', ['id' => $tourDetail->tourId]) }}" method="POST">
+                                @csrf
                                 <div class="date mb-25">
                                     <b>Ngày bắt đầu</b>
                                     <input type="text" value="{{ date('d-m-Y', strtotime($tourDetail->startDate)) }}"
@@ -513,6 +514,7 @@
                                 <div class="time py-5">
                                     <b>Thời gian :</b>
                                     <p>{{ $tourDetail->time }}</p>
+                                    <input name='time' type="hidden">
                                 </div>
                                 <hr class="mb-25">
                                 <h6>Vé:</h6>
@@ -535,8 +537,7 @@
                                     </li>
                                     
                                 </ul>
-                                <hr class="mb-25">
-                                <h6>Tổng tiền:</h6>
+
                                 <ul class="radio-filter pt-5">
                                     <li>
                                         <input class="form-check-input" checked type="radio" name="AddExtra" id="add-extra1">
@@ -550,7 +551,7 @@
                                 <hr>
                                 <h6>Total: <span class="price">$74</span></h6>
                                 <button type="submit" class="theme-btn style-two w-100 mt-15 mb-5">
-                                    <span data-hover="Book Now">Book Now</span>
+                                    <span data-hover="Đặt ngay">Đặt ngay</span>
                                     <i class="fal fa-arrow-right"></i>
                                 </button>
                                 <div class="text-center">
@@ -558,6 +559,11 @@
                                 </div>
                             </form>
                         </div>
+
+                        <button type="submit" class="theme-btn style-two w-100 mt-15 mb-5">
+                            <span data-hover="Đặt ngay">Đặt ngay</span>
+                            <i class="fal fa-arrow-right"></i>
+                        </button>
                         
                         <div class="widget widget-contact" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                             <h5 class="widget-title">Cần trợ giúp ?</h5>

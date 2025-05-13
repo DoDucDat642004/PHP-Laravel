@@ -7,7 +7,7 @@
             style="background-image: url({{ asset('clients/assets/images/hero/hero.jpg') }});">
         </div>
     </div>
-    <form action="#" method="GET" id="search_form">
+    <form action="{{ route('search') }}" method="GET" id="search_form">
         <div class="container container-1400">
             <div class="search-filter-inner" data-aos="zoom-out-down" data-aos-duration="1500" data-aos-offset="50">
                 <div class="filter-item clearfix">

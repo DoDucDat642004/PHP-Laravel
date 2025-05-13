@@ -66,6 +66,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if (response.success) {
                         window.location.href = "/";
+                        toastr.success(response.message, { timeOut: 5000 });
                     } else {
                         toastr.error(response.message);
                     }
@@ -184,7 +185,7 @@ $(document).ready(function () {
     // Kiểm tra nếu thanh trượt đã tồn tại
     if ($(".price-slider-range").length) {
         $(".price-slider-range").on("slide", function (event, ui) {
-            filterTours(ui.values[0], ui.values[1]);
+            filterTours(ui.values[0], ui.values[1]);   
         });
     }
     $('input[name="domain"]').on("change", filterTours);
@@ -859,7 +860,8 @@ $(document).ready(function () {
                                 $("#partials_reviews .comment-body").addClass(
                                     "aos-animate"
                                 );
-                                // Xử lý reset form hoặc thông báo
+                                // Xử lý reset form hoặc thông báoLogin
+
                                 $("#message").val("");
                                 $('#comment-form').hide();
                                 resetStars();
