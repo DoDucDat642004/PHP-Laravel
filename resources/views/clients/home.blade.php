@@ -1,105 +1,55 @@
 @include('clients.blocks.header_home')
-@include('clients.blocks.banner_home')  
+@include('clients.blocks.banner_home')
 
-        <!--Form Back Drop-->
-        <div class="form-back-drop"></div>
-        <!-- Destinations Area start -->
-        <section class="destinations-area bgc-black pt-100 pb-70 rel z-1">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="section-title text-white text-center counter-text-wrap mb-70" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
-                            <h2>Khám phá báu vật Việt Nam cùng DuLich</h2>
-                            <p>Website <span class="count-text plus" data-speed="3000" data-stop="40">0</span> địa điểm phổ biến nhất</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-xxl-3 col-xl-4 col-md-6">
-                        <div class="destination-item" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
-                            <div class="image">
-                                <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
-                                <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                <img src="{{ asset('clients/assets/images/destinations/visiting-place1.jpg') }}" alt="Destination">
-                            </div>
-                            <div class="content">
-                                <span class="location"><i class="fal fa-map-marker-alt"></i> Tours, France</span>
-                                <h5><a href="{{ url('destination-details') }}">Brown Concrete Building Basilica St Martin</a></h5>
-                                <span class="time">3 days 2 nights - Couple</span>
-                            </div>
-                            <div class="destination-footer">
-                                <span class="price"><span>$58.00</span>/per person</span>
-                                <a href="#" class="read-more">Book Now <i class="fal fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-md-6">
-                        <div class="destination-item" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="50">
-                            <div class="image">
-                                <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
-                                <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                <img src="{{ asset('clients/assets/images/destinations/visiting-place2.jpg') }}" alt="Destination">
-                            </div>
-                            <div class="content">
-                                <span class="location"><i class="fal fa-map-marker-alt"></i> Wildest, Italy</span>
-                                <h5><a href="{{ url('destination-details') }}">Blue lake water view taken travel with daytime</a></h5>
-                                <span class="time">3 days 2 nights - Couple</span>
-                            </div>
-                            <div class="destination-footer">
-                                <span class="price"><span>$63.00</span>/per person</span>
-                                <a href="#" class="read-more">Book Now <i class="fal fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-3 col-xl-4 col-md-6">
-                        <div class="destination-item" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="50">
-                            <div class="image">
-                                <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
-                                <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                <img src="{{ asset('clients/assets/images/destinations/visiting-place3.jpg') }}" alt="Destination">
-                            </div>
-                            <div class="content">
-                                <span class="location"><i class="fal fa-map-marker-alt"></i> Rome, Italy</span>
-                                <h5><a href="{{ url('destination-details') }}">Woman standing near Colosseum, Rome</a></h5>
-                                <span class="time">3 days 2 nights - Couple</span>
-                            </div>
-                            <div class="destination-footer">
-                                <span class="price"><span>$42</span>/per person</span>
-                                <a href="#" class="read-more">Book Now <i class="fal fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    @foreach($tours as $tour)
-                        <div class="col-xxl-3 col-xl-4 col-md-6">
-                            <div class="destination-item" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1500" data-aos-offset="50">
-                                <div class="image">
-                                    <div class="ratting"><i class="fas fa-star"></i> 4.8</div>
-                                    <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                    <img src="{{ asset('clients/assets/images/gallery-tours/' . (isset($tour->images[0]) ? $tour->images[0] : 'default.jpg')) }}" alt="Destination">
+<!--Form Back Drop-->
+<div class="form-back-drop"></div>
 
-                                </div>
-                                <div class="content">
-                                    <span class="location"><i class="fal fa-map-marker-alt"></i>{{ $tour->destination }}</span>
-                                    <h5><a href="{{ url('destination-details') }}">{{ $tour->title }}</a></h5>
-                                    <span class="time">{{ $tour->time }}</span>
-                                </div>
-                                <div class="destination-footer">
-                                    <span class="price"><span>{{ number_format($tour->priceAdult, 0, ',', '.') }}</span>VND / Người</span>
-                                    <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="read-more">Book Now <i class="fal fa-angle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
+<!-- Destinations Area start -->
+<section class="destinations-area bgc-black pt-100 pb-70 rel z-1">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="section-title text-white text-center counter-text-wrap mb-70" data-aos="fade-up"
+                    data-aos-duration="1500" data-aos-offset="50">
+                    <h2>Khám phá kho báu việt nam cùng Travela</h2>
+                    <p>Website<span class="count-text plus" data-speed="3000" data-stop="24080">0</span>
+                        phổ biến nhất mà bạn sẽ nhớ</p>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="row justify-content-center">
+            @foreach ($tours as $tour)
+                <div class="col-xxl-3 col-xl-4 col-md-6" style="margin-bottom: 30px">
+                    <div class="destination-item block_tours" data-aos="fade-up" data-aos-duration="1500"
+                        data-aos-offset="50">
+                        <div class="image">
+                            <div class="ratting"><i class="fas fa-star"></i> {{ number_format($tour->rating, 1) }}</div>
+                            <a href="#" class="heart"><i class="fas fa-heart"></i></a>
+                            <img src="{{ asset('clients/assets/images/gallery-tours/' . $tour->images[0] . '') }}"
+                                alt="Destination">
+                        </div>
+                        <div class="content">
+                            <span class="location"><i class="fal fa-map-marker-alt"></i>{{ $tour->destination }}</span>
+                            <h5><a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a>
+                            </h5>
+                            <span class="time">{{ $tour->time }}</span>
+                        </div>
+                        <div class="destination-footer">
+                            <span class="price"><span>{{ number_format($tour->priceAdult, 0, ',', '.') }}</span> VND /
+                                người</span>
+                            <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="read-more">Đặt ngay <i
+                                    class="fal fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 <!-- Destinations Area end -->
 
-         
-         
-        <!-- About Us Area start -->
+
+<!-- About Us Area start -->
 <section class="about-us-area py-100 rpb-90 rel z-1">
     <div class="container">
         <div class="row align-items-center">
@@ -157,117 +107,62 @@
 </section>
 <!-- About Us Area end -->
 
-         
-         
-        <!-- Popular Destinations Area start -->
-        <section class="popular-destinations-area rel z-1">
-            <div class="container-fluid">
-                <div class="popular-destinations-wrap br-20 bgc-lighter pt-100 pb-70">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-12">
-                            <div class="section-title text-center counter-text-wrap mb-70" data-aos="fade-up"
-                                data-aos-duration="1500" data-aos-offset="50">
-                                <h2>Khám phá các điểm đến phổ biến</h2>
-                                <p>Website <span class="count-text plus" data-speed="3000" data-stop="24080">0</span> trải
-                                    nghiệm phổ biến nhất</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination1.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Thailand beach</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-xl-3 col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination2.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Parga, Greece</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination3.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Castellammare del Golfo, Italy</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination4.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Reserve of Canada, Canada</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="100" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination5.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Dubai united states</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="destination-item style-two" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1500" data-aos-offset="50">
-                                    <div class="image">
-                                        <a href="#" class="heart"><i class="fas fa-heart"></i></a>
-                                        <img src="{{ asset('clients/assets/images/destinations/destination6.jpg') }}" alt="Destination">
-                                    </div>
-                                    <div class="content">
-                                        <h6><a href="{{ url('destination-details') }}">Milos, Greece</a></h6>
-                                        <span class="time">5352+ tours & 856+ Activity</span>
-                                        <a href="#" class="more"><i class="fas fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!-- Popular Destinations Area start -->
+<section class="popular-destinations-area rel z-1">
+    <div class="container-fluid">
+        <div class="popular-destinations-wrap br-20 bgc-lighter pt-100 pb-70">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section-title text-center counter-text-wrap mb-70" data-aos="fade-up"
+                        data-aos-duration="1500" data-aos-offset="50">
+                        <h2>Khám phá các điểm đến phổ biến</h2>
+                        <p>Website <span class="count-text plus" data-speed="3000" data-stop="24080">0</span> trải
+                            nghiệm phổ biến nhất</p>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="container">
+                <div class="row justify-content-center">
+                    @php $count = 0; @endphp
+                    @foreach ($toursPopular as $tour)
+                        @if ($count == 2 || $count == 3)
+                            <!-- Cột thứ 3 và thứ 4 sẽ là col-md-6 -->
+                            <div class="col-md-6 item ">
+                            @else
+                                <!-- Các cột còn lại sẽ là col-xl-3 col-md-6 -->
+                                <div class="col-xl-3 col-md-6 item ">
+                        @endif
+
+                        <div class="destination-item style-two" data-aos-duration="1500" data-aos-offset="50">
+                            <div class="image" style="max-height: 250px">
+                                <a href="#" class="heart"><i class="fas fa-heart"></i></a>
+                                <img src="{{ asset('clients/assets/images/gallery-tours/'.$tour->images[0]) }}"
+                                    alt="Destination">
+                            </div>
+                            <div class="content">
+                                <h6 class="tour-title"><a
+                                        href="{{ route('tour-detail', ['id' => $tour->tourId]) }}">{{ $tour->title }}</a>
+                                </h6>
+                                <span class="time">{{ $tour->time }}</span>
+                                <a href="{{ route('tour-detail', ['id' => $tour->tourId]) }}" class="more"><i
+                                        class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+
+                </div> <!-- Đóng div col-md-6 hoặc col-xl-3 col-md-6 -->
+
+                @php $count++; @endphp
+                @endforeach
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
 <!-- Popular Destinations Area end -->
 
-        
-        
-       <!-- Features Area start -->
+
+<!-- Features Area start -->
 <section class="features-area pt-100 pb-45 rel z-1">
     <div class="container">
         <div class="row align-items-center">
@@ -341,11 +236,6 @@
 </section>
 <!-- Features Area end -->
 
-
-         
-         
-        
-
 <!-- CTA Area start -->
 <section class="cta-area pt-100 rel z-1">
     <div class="container-fluid">
@@ -391,5 +281,4 @@
 <!-- CTA Area end -->
 
 
-          
-@include('clients.blocks.footer_home')        
+@include('clients.blocks.footer_home')

@@ -16,6 +16,8 @@ use App\Http\Controllers\clients\LoginController;
 use App\Http\Controllers\clients\LoginGoogleController;
 use App\Http\Controllers\clients\SearchController;
 use App\Http\Controllers\clients\UserProfileController;
+use App\Http\Controllers\clients\TourBookedController;
+use App\Http\Controllers\clients\MyTourController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -25,7 +27,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/tours', [ToursController::class, 'index'])->name('tours');
 Route::get('/destination', [DestinationController::class, 'index'])->name('destination');
-// Route::get('/booking', [BookingController::class, 'index'])->name('booking');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/travel-guides', [TravelGuidesController::class, 'index'])->name('travel-guides');
 Route::get('/testimonial', [TestimonialController::class, 'index'])->name('testimonial');
@@ -63,6 +64,23 @@ Route::post('/change-avatar-profile', [UserProfileController::class, 'changeAvat
 Route::post('/booking/{id?}', [BookingController::class, 'index'])->name('booking');
 Route::post('/create-booking', [BookingController::class, 'createBooking'])->name('create-booking');
 // Route::get('/booking', [BookingController::class, 'handlePaymentMomoCallback'])->name('handlePaymentMomoCallback')
+
+//Tour booked
+Route::get('/tour-booked', [TourBookedController::class, 'index'])->name('tour-booked');
+Route::post('/cancel-booking', [TourBookedController::class, 'cancelBooking'])->name('cancel-booking');
+
+//My tour
+Route::get('/my-tours', [MyTourController::class, 'index'])->name('my-tours');
+
+//get Tour detail and handle submit reviews
+Route::get('/tour-detail/{id?}', [TourDetailController::class, 'index'])->name('tour-detail');
+Route::post('/checkBooking', [BookingController::class, 'checkBooking'])->name('checkBooking');
+Route::post('/reviews', [TourDetailController::class, 'reviews'])->name('reviews');
+
+//Contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/create-contact', [ContactController::class, 'createContact'])->name('create-contact');
+
 
 //Search 
 Route::get('/search', [SearchController::class, 'index'])->name(name: 'search');

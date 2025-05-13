@@ -8,44 +8,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 
 class Home extends Model
-{
-    use HasFactory;
-    
-    // Tên bảng trong database
+{use HasFactory;
+
     protected $table = 'tbl_tours';
 
-    // public function getHomeTours(): collection{
-        
-    //     // Lấy thông tin tour
-    //     $tours = DB::table($this->table)->get();
-
-        // foreach ($tours as $tour) {
-        //     // Lấy danh sách hình ảnh thuộc về tour
-        //     $tour->images = DB::table('tbl_images')
-        //         ->where('tourId', $tour->tourId)
-        //         ->pluck('imageUrl');
-
-        //         // $tour->timeline = DB::table('tbl_timeline')
-        //         // ->where('tourId', $tour->tourId)
-        //         // ->pluck('title');
-        // }
-
-    //     return $tours;
-    // }
-
-    public function getHomeTours(): Collection
+    public function getHomeTours()
     {
         // Lấy thông tin tour
-        $tours = DB::table($this->table)->get();
+        $tours = DB::table($this->table)
+            ->where('availability', 1)
+            ->take(8)
+            ->get();
 
         foreach ($tours as $tour) {
+            // Lấy danh sách hình ảnh thuộc về tour
             $tour->images = DB::table('tbl_images')
                 ->where('tourId', $tour->tourId)
                 ->pluck('imageUrl');
+
+            // Tạo instance của Tours và gọi reviewStats
+            $toursModel = new Tours();
+            $tour->rating = $toursModel->reviewStats($tour->tourId)->averageRating;
         }
-        
 
         return $tours;
     }
-
 }

@@ -3,32 +3,28 @@
 namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\clients\Home;
 use App\Models\clients\Tours;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-use function PHPUnit\Framework\isEmpty;
-
-class HomeController extends Controller
+class MyTourController extends Controller
 {
-    private $homeTours;
     private $tours;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->homeTours = new Home();
+        parent::__construct(); // Gọi constructor của Controller để khởi tạo $user
         $this->tours = new Tours();
     }
+
     public function index()
     {
-        $title = 'Trang chủ';
-        $tours = $this->homeTours->getHomeTours();
-
+        $title = 'Tours đã đặt';
+        $userId = $this->getUserId();
+        
+        $myTours = $this->user->getMyTours($userId);
         $userId = $this->getUserId();
         if ($userId) {
-            
             // Gọi API Python để lấy danh sách tour được gợi ý cho từng người dùng 
             try {
                 $apiUrl = 'http://127.0.0.1:5555/api/user-recommendations';
@@ -38,6 +34,7 @@ class HomeController extends Controller
 
                 if ($response->successful()) {
                     $tourIds = $response->json('recommended_tours');
+                    $tourIds = array_slice($tourIds, 0, 2);
                 } else {
                     $tourIds = [];
                 }
@@ -47,21 +44,13 @@ class HomeController extends Controller
                 \Log::error('Lỗi khi gọi API liên quan: ' . $e->getMessage());
             }
 
+
             $toursPopular = $this->tours->toursRecommendation($tourIds);
-
-            if (empty($tourIds)) {
-                $toursPopular = $this->tours->toursPopular(6);
-                
-            }
-
             // dd($toursPopular);
         }else {
             $toursPopular = $this->tours->toursPopular(6);
         }
 
-        // dd($toursPopular);
-        return view('clients.home', compact('title', 'tours', 'toursPopular'));
+        return view('clients.my-tours', compact('title', 'myTours','toursPopular'));
     }
-
-
 }

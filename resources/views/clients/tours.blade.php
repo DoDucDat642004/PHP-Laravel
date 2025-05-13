@@ -140,7 +140,7 @@
                         </ul>
                     </div>
 
-                    {{-- @if (!$toursPopular->isEmpty())
+                    @if (!$toursPopular->isEmpty())
                         <div class="widget widget-tour" data-aos="fade-up" data-aos-duration="1500"
                             data-aos-offset="50">
                             <h6 class="widget-title">Phổ biến Tours</h6>
@@ -167,7 +167,7 @@
                                 </div>
                             @endforeach
                         </div>
-                    @endif --}}
+                    @endif
                 </div>
 
                 <div class="widget widget-cta mt-30" data-aos="fade-up" data-aos-duration="1500"

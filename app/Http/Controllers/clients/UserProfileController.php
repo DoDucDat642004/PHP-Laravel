@@ -3,26 +3,23 @@
 namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\clients\User;
-
+use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-    protected $user;
+
     public function __construct()
     {
-        parent::__construct();
-        $this->user = new User();
+        parent::__construct(); // Gọi constructor của Controller để khởi tạo $user
     }
 
     public function index()
     {
         $title = 'Thông tin cá nhân';
-        $username = session()->get('username');
-        $userId = $this->user->getUserId($username);
+        $userId = $this->getUserId();
         $user = $this->user->getUser($userId);
-        // dd( $user );
+        // dd( $userId );
         return view('clients.user-profile', compact('title', 'user'));
     }
 
@@ -39,9 +36,8 @@ class UserProfileController extends Controller
             'email' => $email,
             'phoneNumber' => $phone
         ];
-        
-        $username = session()->get('username');
-        $userId = $this->user->getUserId($username);
+
+        $userId = $this->getUserId();
 
         $update = $this->user->updateUser($userId, $dataUpdate);
         if (!$update) {
@@ -51,8 +47,7 @@ class UserProfileController extends Controller
     }
     public function changePassword(Request $req)
     {
-        $username = session()->get('username');
-        $userId = $this->user->getUserId($username);
+        $userId = $this->getUserId();
         $user = $this->user->getUser($userId);
 
         if (md5($req->oldPass) === $user->password) {
@@ -70,8 +65,7 @@ class UserProfileController extends Controller
 
     public function changeAvatar(Request $req)
     {
-        $username = session()->get('username');
-        $userId = $this->user->getUserId($username);
+        $userId = $this->getUserId();
 
         $req->validate([
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
@@ -86,7 +80,7 @@ class UserProfileController extends Controller
         $user = $this->user->getUser($userId);
         if ($user->avatar) {
             // Đường dẫn đến ảnh cũ
-            $oldAvatarPath = public_path('admin/assets/images/user-profile/' . $user->avatar);
+            $oldAvatarPath = public_path('clients/assets/images/user-profile/' . $user->avatar);
 
             // Kiểm tra tệp cũ có tồn tại và xóa nếu có
             if (file_exists($oldAvatarPath)) {
@@ -95,7 +89,7 @@ class UserProfileController extends Controller
         }
 
         // Di chuyển ảnh vào thư mục public/admin/assets/images/user-profile/
-        $avatar->move(public_path('admin/assets/images/user-profile'), $filename);
+        $avatar->move(public_path('clients/assets/images/user-profile'), $filename);
         $update = $this->user->updateUser($userId, ['avatar' => $filename]);
         $req->session()->put('avatar', $filename);
         if (!$update) {
@@ -103,4 +97,5 @@ class UserProfileController extends Controller
         }
         return response()->json(['success' => true, 'message' => 'Cập nhật ảnh thành công!']);
     }
+
 }

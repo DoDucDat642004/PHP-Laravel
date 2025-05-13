@@ -23,10 +23,10 @@
     @foreach ($getReviews as $review)
         <div class="comment-body" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
             <div class="author-thumb">
-                <img src="{{ asset('admin/assets/images/user-profile/' . $review->avatar) }}" alt="">
+                <img src="{{ asset('clients/assets/images/user-profile/' . $review->avatar) }}" alt="">
             </div>
             <div class="content">
-                <h6>{{ $review->fullName }}</h6>
+                <h6>{{ $review->fullname }}</h6>
                 <div class="ratting">
                     @for ($i = 0; $i < 5; $i++)
                         @if ($review->rating && $i < $review->rating)

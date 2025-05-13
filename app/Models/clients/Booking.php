@@ -25,6 +25,15 @@ class Booking extends Model
         ->update(['bookingStatus' => 'c']);
     }
 
+    public function checkCancelBooking($bookingId, $userId): bool
+    {
+        return DB::table($this->table)
+            ->where('bookingId', $bookingId)
+            ->where('userId', $userId)
+            ->where('bookingStatus', '!=', 'c') // chưa hủy
+            ->exists();
+    }
+
 
     public function checkBooking($tourId, $userId)
     {

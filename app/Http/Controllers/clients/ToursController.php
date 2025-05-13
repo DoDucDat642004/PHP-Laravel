@@ -16,17 +16,27 @@ class ToursController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Tours';
-        $tours = $this->tours->getAllTours();
+        $tours = $this->tours->getAllTours(9);
         $domain = $this->tours->getDomain();
+        // dd($tours);
         $domainsCount = [
             'mien_bac' => optional($domain->firstWhere('domain', 'b'))->count,
             'mien_trung' => optional($domain->firstWhere('domain', 't'))->count,
-            'mien_nam' => optional($domain->firstWhere('domain', 'n'))->count
+            'mien_nam' => optional($domain->firstWhere('domain', 'n'))->count,
         ];
-        return view('clients.tours', compact('title', 'tours', 'domainsCount'));
+
+        // Kiểm tra nếu yêu cầu là AJAX
+        if ($request->ajax()) {
+            return response()->json([
+                'tours' => view('clients.partials.filter-tours', compact('tours'))->render(),
+            ]);
+        }
+        $toursPopular = $this->tours->toursPopular(2);
+
+        return view('clients.tours', compact('title', 'tours', 'domainsCount','toursPopular'));
     }
 
     //Xử lý filter tours
