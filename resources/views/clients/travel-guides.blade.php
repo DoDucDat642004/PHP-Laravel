@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            {{-- <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="team-item hover-content" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide-dien.jpg') }}" alt="Guide">
                     <div class="content">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
             <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="team-item hover-content" data-aos="fade-up" data-aos-duration="1500" data-aos-offset="50">
                     <img src="{{ asset('clients/assets/images/team/guide1.jpg') }}" alt="Guide">
